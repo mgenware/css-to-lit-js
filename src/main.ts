@@ -15,7 +15,6 @@ const args = require('gar')(process.argv.slice(2));
   }
 
   const srcContents = await mfs.readTextFileAsync(inputFile);
-  console.log(' ----- RRR ', srcContents);
   const encoded = encode(srcContents);
   const destContents = `import {css} from 'lit-element';export default css${encoded};`;
   const destFile = rename(inputFile, () => {
