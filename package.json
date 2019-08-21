@@ -1,0 +1,48 @@
+{
+  "name": "css-to-lit-js",
+  "version": "0.0.0",
+  "description": "Convert CSS to lit-element JavaScript file",
+  "main": "dist/main.js",
+  "types": "dist/main.d.ts",
+  "author": "Mgen (https://www.mgenware.com)",
+  "homepage": "https://github.com/mgenware/css-to-lit-js",
+  "bugs": "https://github.com/mgenware/css-to-lit-js/issues",
+  "keywords": [
+    "lit-element",
+    "web components"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mgenware/css-to-lit-js.git"
+  },
+  "license": "MIT",
+  "scripts": {
+    "test": "yarn run clean && yarn run compile && yarn run lint && yarn run t",
+    "t": "mocha dist_tests/*.js",
+    "build": "cross-env NODE_ENV=production yarn test",
+    "compile": "tsc -b tests",
+    "dev": "cross-env NODE_ENV=development yarn run clean && tsc -b tests -w",
+    "prepublishOnly": "yarn run test",
+    "lint": "tslint --project tsconfig.json --config tslint.json",
+    "clean": "del-cli dist && del-cli dist_tests"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "devDependencies": {
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^12.7.2",
+    "cross-env": "^5.2.0",
+    "del-cli": "^2.0.0",
+    "mocha": "^6.2.0",
+    "tempy": "^0.3.0",
+    "tslint": "^5.19.0",
+    "typescript": "^3.5.3"
+  },
+  "dependencies": {
+    "gar": "^1.0.4",
+    "m-fs": "^2.3.1",
+    "node-rename-path": "^3.0.1",
+    "string-to-template-literal": "^0.2.0"
+  }
+}
