@@ -15,6 +15,9 @@
     "type": "git",
     "url": "https://github.com/mgenware/css-to-lit-js.git"
   },
+  "bin": {
+    "css-to-lit-js": "dist/main.js"
+  },
   "license": "MIT",
   "scripts": {
     "test": "yarn run clean && yarn run compile && yarn run lint && yarn run t",
