@@ -19,7 +19,7 @@ const args = require('gar')(process.argv.slice(2));
   const destContents = `import {css} from 'lit-element';export default css${encoded};`;
   const destFile = rename(inputFile, () => {
     return {
-      ext: args.ext || '.js',
+      ext: `.${args.ext || 'js'}`,
     };
   });
   await mfs.writeFileAsync(destFile, destContents);

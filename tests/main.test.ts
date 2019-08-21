@@ -27,3 +27,23 @@ it('Basic', async () => {
 "'\\\\\\\`\\\$\`;`,
   );
 });
+
+it('ext', async () => {
+  const tmpFile = newFile();
+  await mfs.writeFileAsync(tmpFile, `123\n\n"'\\\`$`);
+  console.log(tmpFile);
+  execSync(`node ./dist/main.js "${tmpFile}" -ext ts`);
+  const contents = await mfs.readTextFileAsync(
+    rename(tmpFile, () => {
+      return {
+        ext: '.ts',
+      };
+    }),
+  );
+  assert.equal(
+    contents,
+    `import {css} from 'lit-element';export default css\`123
+
+"'\\\\\\\`\\\$\`;`,
+  );
+});

@@ -29,7 +29,7 @@ Run `css-to-lit-js`:
 css-to-lit-js a.css
 ```
 
-`a.js` is generated with the following contents:
+`a.js` will be generated with the following contents:
 
 ```js
 import { css } from 'lit-element';
@@ -39,3 +39,7 @@ export default css`
   }
 `;
 ```
+
+### Options
+
+- `-ext` set the extension for output file, defaults to `js`, e.g. `css-to-lit-js a.css -ext ts`.
