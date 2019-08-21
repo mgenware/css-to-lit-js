@@ -1,6 +1,6 @@
 {
   "name": "css-to-lit-js",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Convert CSS to lit-element JavaScript file",
   "main": "dist/main.js",
   "types": "dist/main.d.ts",
