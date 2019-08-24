@@ -11,7 +11,6 @@ function newFile(): string {
 it('Basic', async () => {
   const tmpFile = newFile();
   await mfs.writeFileAsync(tmpFile, `123\n\n"'\\\`$`);
-  console.log(tmpFile);
   execSync(`node ./dist/main.js "${tmpFile}"`);
   const contents = await mfs.readTextFileAsync(
     rename(tmpFile, () => {
@@ -31,7 +30,6 @@ it('Basic', async () => {
 it('ext', async () => {
   const tmpFile = newFile();
   await mfs.writeFileAsync(tmpFile, `123\n\n"'\\\`$`);
-  console.log(tmpFile);
   execSync(`node ./dist/main.js "${tmpFile}" -ext ts`);
   const contents = await mfs.readTextFileAsync(
     rename(tmpFile, () => {
