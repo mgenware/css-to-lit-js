@@ -1,6 +1,7 @@
 import * as assert from 'assert';
 import * as tempy from 'tempy';
 import * as mfs from 'm-fs';
+import * as nodepath from 'path';
 import { execSync } from 'child_process';
 import rename from 'node-rename-path';
 
@@ -52,6 +53,22 @@ it('`out` option', async () => {
   await mfs.writeFileAsync(tmpFile, `123\n\n"'\\\`$`);
   execSync(`node ./dist/main.js "${tmpFile}" -ext ts -out "${tmpDestFile}"`);
   const contents = await mfs.readTextFileAsync(tmpDestFile);
+  assert.equal(
+    contents,
+    `import {css} from 'lit-element';export default css\`123
+
+"'\\\\\\\`\\\$\`;`,
+  );
+});
+
+it('`outdir` option', async () => {
+  const tmpFile = newFile();
+  const tmpDir = tempy.directory();
+  await mfs.writeFileAsync(tmpFile, `123\n\n"'\\\`$`);
+  execSync(`node ./dist/main.js "${tmpFile}" -ext ts -outdir "${tmpDir}"`);
+  const contents = await mfs.readTextFileAsync(
+    nodepath.join(tmpDir, nodepath.parse(tmpFile).name + '.ts'),
+  );
   assert.equal(
     contents,
     `import {css} from 'lit-element';export default css\`123

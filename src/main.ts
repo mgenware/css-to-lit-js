@@ -2,6 +2,7 @@
 import * as mfs from 'm-fs';
 import encode from 'string-to-template-literal';
 import rename from 'node-rename-path';
+import * as nodepath from 'path';
 const args = require('gar')(process.argv.slice(2));
 
 (async () => {
@@ -10,19 +11,27 @@ const args = require('gar')(process.argv.slice(2));
     ? inputArray[0]
     : (inputArray as string);
   if (!inputFile) {
-    console.log('No input file');
+    console.error('No input file');
     process.exit(1);
   }
 
   const srcContents = await mfs.readTextFileAsync(inputFile);
   const encoded = encode(srcContents);
   const destContents = `import {css} from 'lit-element';export default css${encoded};`;
-  const destFile =
-    args.out ||
-    rename(inputFile, () => {
+  let destPath: string;
+  if (args.out) {
+    destPath = args.out;
+  } else {
+    const destFileName = rename(inputFile, () => {
       return {
         ext: `.${args.ext || 'js'}`,
       };
     });
-  await mfs.writeFileAsync(destFile, destContents);
+    if (args.outdir) {
+      destPath = nodepath.join(args.outdir, nodepath.basename(destFileName));
+    } else {
+      destPath = destFileName;
+    }
+  }
+  await mfs.writeFileAsync(destPath, destContents);
 })();
