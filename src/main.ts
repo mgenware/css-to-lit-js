@@ -17,10 +17,12 @@ const args = require('gar')(process.argv.slice(2));
   const srcContents = await mfs.readTextFileAsync(inputFile);
   const encoded = encode(srcContents);
   const destContents = `import {css} from 'lit-element';export default css${encoded};`;
-  const destFile = rename(inputFile, () => {
-    return {
-      ext: `.${args.ext || 'js'}`,
-    };
-  });
+  const destFile =
+    args.out ||
+    rename(inputFile, () => {
+      return {
+        ext: `.${args.ext || 'js'}`,
+      };
+    });
   await mfs.writeFileAsync(destFile, destContents);
 })();

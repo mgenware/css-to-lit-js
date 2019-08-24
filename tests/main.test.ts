@@ -27,7 +27,7 @@ it('Basic', async () => {
   );
 });
 
-it('ext', async () => {
+it('`ext` option', async () => {
   const tmpFile = newFile();
   await mfs.writeFileAsync(tmpFile, `123\n\n"'\\\`$`);
   execSync(`node ./dist/main.js "${tmpFile}" -ext ts`);
@@ -38,6 +38,20 @@ it('ext', async () => {
       };
     }),
   );
+  assert.equal(
+    contents,
+    `import {css} from 'lit-element';export default css\`123
+
+"'\\\\\\\`\\\$\`;`,
+  );
+});
+
+it('`out` option', async () => {
+  const tmpFile = newFile();
+  const tmpDestFile = newFile();
+  await mfs.writeFileAsync(tmpFile, `123\n\n"'\\\`$`);
+  execSync(`node ./dist/main.js "${tmpFile}" -ext ts -out "${tmpDestFile}"`);
+  const contents = await mfs.readTextFileAsync(tmpDestFile);
   assert.equal(
     contents,
     `import {css} from 'lit-element';export default css\`123
