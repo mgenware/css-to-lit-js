@@ -33,5 +33,6 @@ const args = require('gar')(process.argv.slice(2));
       destPath = destFileName;
     }
   }
+  console.log(`Writing file "${destPath}"`);
   await mfs.writeFileAsync(destPath, destContents);
 })();
