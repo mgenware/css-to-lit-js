@@ -32,6 +32,11 @@
   "engines": {
     "node": ">=8.6.0"
   },
+  "files": [
+    "/dist/**/*.js",
+    "/dist/**/*.ts",
+    "/dist/**/*.map"
+  ],
   "devDependencies": {
     "@types/mocha": "^5.2.7",
     "@types/node": "^12.7.2",
