@@ -5,6 +5,9 @@ import * as nodepath from 'path';
 import { execSync } from 'child_process';
 import rename from 'node-rename-path';
 
+const pkg = require('../package.json');
+const CLI = `node ${pkg.bin[pkg.name]}`;
+
 function newFile(): string {
   return tempy.file({ extension: '.css' });
 }
@@ -12,7 +15,7 @@ function newFile(): string {
 it('Basic', async () => {
   const tmpFile = newFile();
   await mfs.writeFileAsync(tmpFile, `123\n\n"'\\\`$`);
-  execSync(`node ./dist/main.js "${tmpFile}"`);
+  execSync(`${CLI} "${tmpFile}"`);
   const contents = await mfs.readTextFileAsync(
     rename(tmpFile, () => {
       return {
@@ -22,16 +25,18 @@ it('Basic', async () => {
   );
   assert.equal(
     contents,
-    `import {css} from 'lit-element';export default css\`123
+    `import { css } from 'lit-element';
+export default css\`123
 
-"'\\\\\\\`\\\$\`;`,
+"'\\\\\\\`\\\$\`;
+`,
   );
 });
 
 it('`ext` option', async () => {
   const tmpFile = newFile();
   await mfs.writeFileAsync(tmpFile, `123\n\n"'\\\`$`);
-  execSync(`node ./dist/main.js "${tmpFile}" -ext ts`);
+  execSync(`${CLI} "${tmpFile}" -ext ts`);
   const contents = await mfs.readTextFileAsync(
     rename(tmpFile, () => {
       return {
@@ -41,9 +46,11 @@ it('`ext` option', async () => {
   );
   assert.equal(
     contents,
-    `import {css} from 'lit-element';export default css\`123
+    `import { css } from 'lit-element';
+export default css\`123
 
-"'\\\\\\\`\\\$\`;`,
+"'\\\\\\\`\\\$\`;
+`,
   );
 });
 
@@ -51,13 +58,15 @@ it('`out` option', async () => {
   const tmpFile = newFile();
   const tmpDestFile = newFile();
   await mfs.writeFileAsync(tmpFile, `123\n\n"'\\\`$`);
-  execSync(`node ./dist/main.js "${tmpFile}" -ext ts -out "${tmpDestFile}"`);
+  execSync(`${CLI} "${tmpFile}" -ext ts -out "${tmpDestFile}"`);
   const contents = await mfs.readTextFileAsync(tmpDestFile);
   assert.equal(
     contents,
-    `import {css} from 'lit-element';export default css\`123
+    `import { css } from 'lit-element';
+export default css\`123
 
-"'\\\\\\\`\\\$\`;`,
+"'\\\\\\\`\\\$\`;
+`,
   );
 });
 
@@ -65,14 +74,16 @@ it('`outdir` option', async () => {
   const tmpFile = newFile();
   const tmpDir = tempy.directory();
   await mfs.writeFileAsync(tmpFile, `123\n\n"'\\\`$`);
-  execSync(`node ./dist/main.js "${tmpFile}" -ext ts -outdir "${tmpDir}"`);
+  execSync(`${CLI} "${tmpFile}" -ext ts -outdir "${tmpDir}"`);
   const contents = await mfs.readTextFileAsync(
     nodepath.join(tmpDir, nodepath.parse(tmpFile).name + '.ts'),
   );
   assert.equal(
     contents,
-    `import {css} from 'lit-element';export default css\`123
+    `import { css } from 'lit-element';
+export default css\`123
 
-"'\\\\\\\`\\\$\`;`,
+"'\\\\\\\`\\\$\`;
+`,
   );
 });

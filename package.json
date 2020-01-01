@@ -16,7 +16,7 @@
     "url": "https://github.com/mgenware/css-to-lit-js.git"
   },
   "bin": {
-    "css-to-lit-js": "dist/main.js"
+    "css-to-lit-js": "dist/cli.js"
   },
   "license": "MIT",
   "scripts": {

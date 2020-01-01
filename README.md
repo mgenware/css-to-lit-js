@@ -43,3 +43,31 @@ export default css`
 ### Options
 
 - `-ext` set the extension for output file, defaults to `js`, e.g. `css-to-lit-js a.css -ext ts`.
+
+### API
+
+Install `css-to-lit-js` locally:
+
+```sh
+yarn add css-to-lit-js
+```
+
+```ts
+import convert from 'css-to-lit-js';
+
+convert(`
+body {
+  background-color: #ededed;
+}`);
+/*
+  Returns the following string:
+
+import { css } from 'lit-element';
+export default css`
+  body {
+    background-color: #ededed;
+  }
+`;
+
+*/
+```
