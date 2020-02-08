@@ -5,6 +5,7 @@ import * as nodepath from 'path';
 import { execSync } from 'child_process';
 import rename from 'node-rename-path';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const pkg = require('../package.json');
 const CLI = `node ${pkg.bin[pkg.name]}`;
 
