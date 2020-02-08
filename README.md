@@ -1,11 +1,11 @@
 # css-to-lit-js
 
-Convert CSS to lit-element JavaScript file
-
 [![Build Status](https://github.com/mgenware/css-to-lit-js/workflows/Build/badge.svg)](https://github.com/mgenware/css-to-lit-js/actions)
 [![MEAN Module](https://img.shields.io/badge/MEAN%20Module-TypeScript-blue.svg?style=flat-square)](https://github.com/mgenware/MEAN-Module)
 [![npm version](https://img.shields.io/npm/v/css-to-lit-js.svg?style=flat-square)](https://npmjs.com/package/css-to-lit-js)
 [![Node.js Version](http://img.shields.io/node/v/css-to-lit-js.svg?style=flat-square)](https://nodejs.org/en/)
+
+Convert CSS to lit-element JavaScript file
 
 ## Installation
 
