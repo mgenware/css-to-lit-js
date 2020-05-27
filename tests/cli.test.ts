@@ -26,7 +26,8 @@ it('Basic', async () => {
   );
   assert.equal(
     contents,
-    `import { css } from 'lit-element';
+    `/* eslint-disable */
+import { css } from 'lit-element';
 export default css\`123
 
 "'\\\\\\\`\\\$\`;
@@ -47,7 +48,8 @@ it('`ext` option', async () => {
   );
   assert.equal(
     contents,
-    `import { css } from 'lit-element';
+    `/* eslint-disable */
+import { css } from 'lit-element';
 export default css\`123
 
 "'\\\\\\\`\\\$\`;
@@ -63,7 +65,8 @@ it('`out` option', async () => {
   const contents = await mfs.readTextFileAsync(tmpDestFile);
   assert.equal(
     contents,
-    `import { css } from 'lit-element';
+    `/* eslint-disable */
+import { css } from 'lit-element';
 export default css\`123
 
 "'\\\\\\\`\\\$\`;
@@ -81,7 +84,8 @@ it('`outdir` option', async () => {
   );
   assert.equal(
     contents,
-    `import { css } from 'lit-element';
+    `/* eslint-disable */
+import { css } from 'lit-element';
 export default css\`123
 
 "'\\\\\\\`\\\$\`;
