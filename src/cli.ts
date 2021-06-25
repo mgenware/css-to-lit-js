@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 /* eslint-disable arrow-body-style */
 import * as mfs from 'm-fs';
-import rename from 'node-rename-path';
 import * as nodepath from 'path';
 import parseArgs from 'meow';
 import { readFile } from 'fs/promises';
@@ -62,11 +61,7 @@ if (flags.version) {
   if (flags.out) {
     destPath = flags.out;
   } else {
-    const destFileName = rename(inputFile, () => {
-      return {
-        ext: `.${flags.ext || 'js'}`,
-      };
-    });
+    const destFileName = `${inputFile}.${flags.ext || 'js'}`;
     if (flags.outdir) {
       destPath = nodepath.join(flags.outdir, nodepath.basename(destFileName));
     } else {

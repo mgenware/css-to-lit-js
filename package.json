@@ -48,7 +48,6 @@
   "dependencies": {
     "m-fs": "^5.0.0",
     "meow": "^10.0.1",
-    "node-rename-path": "^5.0.0",
     "string-to-template-literal": "^2.0.0"
   }
 }

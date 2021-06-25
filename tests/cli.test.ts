@@ -5,7 +5,6 @@ import * as tempy from 'tempy';
 import * as mfs from 'm-fs';
 import * as nodepath from 'path';
 import { execSync } from 'child_process';
-import rename from 'node-rename-path';
 import { readFile } from 'fs/promises';
 import { fileURLToPath } from 'url';
 
@@ -21,13 +20,7 @@ it('Basic', async () => {
   const tmpFile = newFile();
   await mfs.writeFileAsync(tmpFile, `123\n\n"'\\\`$`);
   execSync(`${CLI} "${tmpFile}"`);
-  const contents = await mfs.readTextFileAsync(
-    rename(tmpFile, () => {
-      return {
-        ext: '.js',
-      };
-    }),
-  );
+  const contents = await mfs.readTextFileAsync(`${tmpFile}.js`);
   assert.equal(
     contents,
     `/* eslint-disable */
@@ -43,13 +36,7 @@ it('`ext` option', async () => {
   const tmpFile = newFile();
   await mfs.writeFileAsync(tmpFile, `123\n\n"'\\\`$`);
   execSync(`${CLI} "${tmpFile}" --ext ts`);
-  const contents = await mfs.readTextFileAsync(
-    rename(tmpFile, () => {
-      return {
-        ext: '.ts',
-      };
-    }),
-  );
+  const contents = await mfs.readTextFileAsync(`${tmpFile}.ts`);
   assert.equal(
     contents,
     `/* eslint-disable */
@@ -84,7 +71,7 @@ it('`outdir` option', async () => {
   await mfs.writeFileAsync(tmpFile, `123\n\n"'\\\`$`);
   execSync(`${CLI} "${tmpFile}" --ext ts --outdir "${tmpDir}"`);
   const contents = await mfs.readTextFileAsync(
-    nodepath.join(tmpDir, nodepath.parse(tmpFile).name + '.ts'),
+    nodepath.join(tmpDir, nodepath.parse(tmpFile).name + '.css.ts'),
   );
   assert.equal(
     contents,

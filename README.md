@@ -29,7 +29,7 @@ Run `css-to-lit-js`:
 css-to-lit-js a.css
 ```
 
-It generates a `a.js`:
+It generates a `a.css.js`:
 
 ```js
 import { css } from 'lit';
