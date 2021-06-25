@@ -2,58 +2,53 @@
   "name": "css-to-lit-js",
   "version": "0.6.0",
   "description": "Convert CSS to lit-element JavaScript file",
-  "main": "dist/main.js",
-  "types": "dist/main.d.ts",
-  "author": "Mgen (https://www.mgenware.com)",
+  "type": "module",
+  "exports": "./dist/main.js",
+  "types": "./dist/main.d.ts",
+  "author": "Mgenware (https://github.com/mgenware)",
   "homepage": "https://github.com/mgenware/css-to-lit-js",
   "bugs": "https://github.com/mgenware/css-to-lit-js/issues",
-  "keywords": [
-    "lit-element",
-    "web components"
-  ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/mgenware/css-to-lit-js.git"
+    "url": "https://github.com/mgenware/css-to-lit-js"
   },
   "bin": {
     "css-to-lit-js": "dist/cli.js"
   },
   "license": "MIT",
   "scripts": {
-    "test": "yarn run clean && yarn run compile && yarn run lint && yarn run t",
-    "t": "mocha dist_tests/**/*.test.js",
-    "build": "cross-env NODE_ENV=production yarn test",
-    "compile": "tsc -b tests",
-    "dev": "cross-env NODE_ENV=development yarn run clean && tsc -b tests -w",
-    "prepublishOnly": "yarn run test",
-    "lint": "eslint --max-warnings 0 --ext .ts src/ tests/",
-    "clean": "del-cli dist && del-cli dist_tests"
+    "r": "daizong",
+    "test": "daizong build"
   },
   "engines": {
-    "node": ">=10.0.0"
+    "node": ">=14.0.0"
   },
   "files": [
-    "/dist/**/*.js",
-    "/dist/**/*.ts",
-    "/dist/**/*.map"
+    "dist/**/*.js",
+    "dist/**/*.ts",
+    "dist/**/*.html",
+    "dist/**/*.css",
+    "dist/**/*.map"
   ],
   "devDependencies": {
-    "@types/mocha": "^7.0.2",
-    "@types/node": "^13.7.0",
-    "@typescript-eslint/eslint-plugin": "^3.0.2",
-    "@typescript-eslint/parser": "^3.0.2",
-    "cross-env": "^7.0.2",
-    "del-cli": "^3.0.1",
-    "eslint": "^6.8.0",
-    "mocha": "^7.2.0",
-    "tempy": "^0.5.0",
-    "tslint": "^6.1.2",
-    "typescript": "^3.9.3"
+    "@types/mocha": "^8.2.2",
+    "@types/node": "^15.12.4",
+    "@typescript-eslint/eslint-plugin": "^4.28.0",
+    "@typescript-eslint/parser": "^4.28.0",
+    "daizong": "^0.15.2",
+    "eslint": "^7.29.0",
+    "eslint-config-mgenware": "^0.1.1",
+    "eslint-plugin-import": "^2.23.4",
+    "mgenware-tsconfig-node": "^14.0.2",
+    "mocha": "^9.0.1",
+    "source-map-support": "^0.5.19",
+    "tempy": "^1.0.1",
+    "typescript": "^4.3.4"
   },
   "dependencies": {
     "gar": "^1.0.4",
-    "m-fs": "^3.0.0",
-    "node-rename-path": "^4.0.1",
-    "string-to-template-literal": "^0.2.2"
+    "m-fs": "^5.0.0",
+    "node-rename-path": "^5.0.0",
+    "string-to-template-literal": "^2.0.0"
   }
 }

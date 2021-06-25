@@ -1,5 +1,5 @@
 import * as assert from 'assert';
-import convert from '..';
+import convert from '../dist/main.js';
 
 it('API', async () => {
   const converted = convert(`123\n\n"'\\\`$`);
@@ -8,8 +8,7 @@ it('API', async () => {
     `/* eslint-disable */
 import { css } from 'lit-element';
 export default css\`123
-
-"'\\\\\\\`\\\$\`;
+"'\\\\\\\`\\$\`;
 `,
   );
 });

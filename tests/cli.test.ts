@@ -1,12 +1,16 @@
+/* eslint-disable prefer-template */
+/* eslint-disable arrow-body-style */
 import * as assert from 'assert';
 import * as tempy from 'tempy';
 import * as mfs from 'm-fs';
 import * as nodepath from 'path';
 import { execSync } from 'child_process';
 import rename from 'node-rename-path';
+import { readFile } from 'fs/promises';
+import { fileURLToPath } from 'url';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const pkg = require('../package.json');
+const dirname = nodepath.dirname(fileURLToPath(import.meta.url));
+const pkg = JSON.parse(await readFile(nodepath.join(dirname, '../package.json'), 'utf8'));
 const CLI = `node ${pkg.bin[pkg.name]}`;
 
 function newFile(): string {
@@ -29,8 +33,7 @@ it('Basic', async () => {
     `/* eslint-disable */
 import { css } from 'lit-element';
 export default css\`123
-
-"'\\\\\\\`\\\$\`;
+"'\\\\\\\`\\$\`;
 `,
   );
 });
@@ -51,8 +54,7 @@ it('`ext` option', async () => {
     `/* eslint-disable */
 import { css } from 'lit-element';
 export default css\`123
-
-"'\\\\\\\`\\\$\`;
+"'\\\\\\\`\\$\`;
 `,
   );
 });
@@ -68,8 +70,7 @@ it('`out` option', async () => {
     `/* eslint-disable */
 import { css } from 'lit-element';
 export default css\`123
-
-"'\\\\\\\`\\\$\`;
+"'\\\\\\\`\\$\`;
 `,
   );
 });
@@ -87,8 +88,7 @@ it('`outdir` option', async () => {
     `/* eslint-disable */
 import { css } from 'lit-element';
 export default css\`123
-
-"'\\\\\\\`\\\$\`;
+"'\\\\\\\`\\$\`;
 `,
   );
 });
