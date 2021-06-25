@@ -3,7 +3,7 @@
 import * as mfs from 'm-fs';
 import rename from 'node-rename-path';
 import * as nodepath from 'path';
-import convert from './main';
+import convert from './main.js';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const args = require('gar')(process.argv.slice(2));
 

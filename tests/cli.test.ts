@@ -31,7 +31,7 @@ it('Basic', async () => {
   assert.equal(
     contents,
     `/* eslint-disable */
-import { css } from 'lit-element';
+import { css } from 'lit';
 export default css\`123
 "'\\\\\\\`\\$\`;
 `,
@@ -52,7 +52,7 @@ it('`ext` option', async () => {
   assert.equal(
     contents,
     `/* eslint-disable */
-import { css } from 'lit-element';
+import { css } from 'lit';
 export default css\`123
 "'\\\\\\\`\\$\`;
 `,
@@ -68,7 +68,7 @@ it('`out` option', async () => {
   assert.equal(
     contents,
     `/* eslint-disable */
-import { css } from 'lit-element';
+import { css } from 'lit';
 export default css\`123
 "'\\\\\\\`\\$\`;
 `,
@@ -86,7 +86,7 @@ it('`outdir` option', async () => {
   assert.equal(
     contents,
     `/* eslint-disable */
-import { css } from 'lit-element';
+import { css } from 'lit';
 export default css\`123
 "'\\\\\\\`\\$\`;
 `,

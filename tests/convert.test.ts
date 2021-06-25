@@ -6,7 +6,7 @@ it('API', async () => {
   assert.equal(
     converted,
     `/* eslint-disable */
-import { css } from 'lit-element';
+import { css } from 'lit';
 export default css\`123
 "'\\\\\\\`\\$\`;
 `,

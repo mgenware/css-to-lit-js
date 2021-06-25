@@ -5,7 +5,7 @@
 [![npm version](https://img.shields.io/npm/v/css-to-lit-js.svg?style=flat-square)](https://npmjs.com/package/css-to-lit-js)
 [![Node.js Version](http://img.shields.io/node/v/css-to-lit-js.svg?style=flat-square)](https://nodejs.org/en/)
 
-Convert CSS to lit-element JavaScript file
+Convert CSS to lit JavaScript file
 
 ## Installation
 
@@ -29,10 +29,10 @@ Run `css-to-lit-js`:
 css-to-lit-js a.css
 ```
 
-`a.js` will be generated with the following contents:
+It generates a `a.js`:
 
 ```js
-import { css } from 'lit-element';
+import { css } from 'lit';
 export default css`
   body {
     background-color: #ededed;
@@ -42,7 +42,7 @@ export default css`
 
 ### Options
 
-- `-ext` set the extension for output file, defaults to `js`, e.g. `css-to-lit-js a.css -ext ts`.
+- `--ext` sets the extension for the output file, defaults to `js`, e.g. `css-to-lit-js a.css --ext ts`.
 
 ### API
 
@@ -62,7 +62,7 @@ body {
 /*
   Returns the following string:
 
-import { css } from 'lit-element';
+import { css } from 'lit';
 export default css`
   body {
     background-color: #ededed;
