@@ -3,14 +3,54 @@
 import * as mfs from 'm-fs';
 import rename from 'node-rename-path';
 import * as nodepath from 'path';
+import parseArgs from 'meow';
+import { readFile } from 'fs/promises';
+import { fileURLToPath } from 'url';
 import convert from './main.js';
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const args = require('gar')(process.argv.slice(2));
+
+const dirname = nodepath.dirname(fileURLToPath(import.meta.url));
+const json = JSON.parse(await readFile(nodepath.join(dirname, '../package.json'), 'utf8'));
+
+const cli = parseArgs(
+  `
+  Usage
+    $ ${json.name} <task>
+
+  Options
+    --ext          Out file extension, defaults to 'js'
+    --version, -v  Print version information
+    
+`,
+  {
+    importMeta: import.meta,
+    flags: {
+      ext: {
+        type: 'string',
+      },
+      out: {
+        type: 'string',
+      },
+      outdir: {
+        type: 'string',
+      },
+      version: {
+        type: 'boolean',
+        alias: 'v',
+      },
+    },
+  },
+);
+
+const { flags } = cli;
+if (flags.version) {
+  // eslint-disable-next-line no-console
+  console.log(json.version);
+  process.exit();
+}
 
 (async () => {
-  const inputArray = args._;
+  const inputArray = cli.input;
   const inputFile = Array.isArray(inputArray) ? inputArray[0] : (inputArray as string);
-  // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
   if (!inputFile) {
     console.error('No input file');
     process.exit(1);
@@ -19,19 +59,16 @@ const args = require('gar')(process.argv.slice(2));
   const src = await mfs.readTextFileAsync(inputFile);
   const dest = convert(src);
   let destPath: string;
-  // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-  if (args.out) {
-    destPath = args.out;
+  if (flags.out) {
+    destPath = flags.out;
   } else {
     const destFileName = rename(inputFile, () => {
       return {
-        // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-        ext: `.${args.ext || 'js'}`,
+        ext: `.${flags.ext || 'js'}`,
       };
     });
-    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-    if (args.outdir) {
-      destPath = nodepath.join(args.outdir, nodepath.basename(destFileName));
+    if (flags.outdir) {
+      destPath = nodepath.join(flags.outdir, nodepath.basename(destFileName));
     } else {
       destPath = destFileName;
     }

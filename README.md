@@ -49,7 +49,7 @@ export default css`
 Install `css-to-lit-js` locally:
 
 ```sh
-yarn add css-to-lit-js
+npm add css-to-lit-js
 ```
 
 ```ts

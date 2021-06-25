@@ -8,6 +8,7 @@ it('API', async () => {
     `/* eslint-disable */
 import { css } from 'lit';
 export default css\`123
+
 "'\\\\\\\`\\$\`;
 `,
   );

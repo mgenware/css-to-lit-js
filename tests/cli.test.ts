@@ -33,6 +33,7 @@ it('Basic', async () => {
     `/* eslint-disable */
 import { css } from 'lit';
 export default css\`123
+
 "'\\\\\\\`\\$\`;
 `,
   );
@@ -41,7 +42,7 @@ export default css\`123
 it('`ext` option', async () => {
   const tmpFile = newFile();
   await mfs.writeFileAsync(tmpFile, `123\n\n"'\\\`$`);
-  execSync(`${CLI} "${tmpFile}" -ext ts`);
+  execSync(`${CLI} "${tmpFile}" --ext ts`);
   const contents = await mfs.readTextFileAsync(
     rename(tmpFile, () => {
       return {
@@ -54,6 +55,7 @@ it('`ext` option', async () => {
     `/* eslint-disable */
 import { css } from 'lit';
 export default css\`123
+
 "'\\\\\\\`\\$\`;
 `,
   );
@@ -63,13 +65,14 @@ it('`out` option', async () => {
   const tmpFile = newFile();
   const tmpDestFile = newFile();
   await mfs.writeFileAsync(tmpFile, `123\n\n"'\\\`$`);
-  execSync(`${CLI} "${tmpFile}" -ext ts -out "${tmpDestFile}"`);
+  execSync(`${CLI} "${tmpFile}" --ext ts --out "${tmpDestFile}"`);
   const contents = await mfs.readTextFileAsync(tmpDestFile);
   assert.equal(
     contents,
     `/* eslint-disable */
 import { css } from 'lit';
 export default css\`123
+
 "'\\\\\\\`\\$\`;
 `,
   );
@@ -79,7 +82,7 @@ it('`outdir` option', async () => {
   const tmpFile = newFile();
   const tmpDir = tempy.directory();
   await mfs.writeFileAsync(tmpFile, `123\n\n"'\\\`$`);
-  execSync(`${CLI} "${tmpFile}" -ext ts -outdir "${tmpDir}"`);
+  execSync(`${CLI} "${tmpFile}" --ext ts --outdir "${tmpDir}"`);
   const contents = await mfs.readTextFileAsync(
     nodepath.join(tmpDir, nodepath.parse(tmpFile).name + '.ts'),
   );
@@ -88,6 +91,7 @@ it('`outdir` option', async () => {
     `/* eslint-disable */
 import { css } from 'lit';
 export default css\`123
+
 "'\\\\\\\`\\$\`;
 `,
   );
